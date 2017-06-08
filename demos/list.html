@@ -36,20 +36,34 @@
         Janet
       </li>
     </ul>
-    <button>shuffle</button>
+    <div>
+      <button class='shuffle'>shuffle</button>
+      <button class='add'>add</button>
+    </div>
     <script>
       const lis = animore('li', {
         duration: 300
       })
 
-      const button = document.querySelector('button')
+      const names = ['Jack', 'Laura', 'Amanda', 'Michael', 'Rob', 'Julia']
+
+      const shuffle = document.querySelector('.shuffle')
+      const add = document.querySelector('.add')
       const ul = document.querySelector('ul')
-      button.addEventListener('click', function() {
+      shuffle.addEventListener('click', function() {
         // update the DOM nodes position
         lis.reverse().map((li) => {
           ul.append(li.el)
           return li.apply
         }).forEach(fn => fn()) // run the flip animations
+      })
+
+      add.addEventListener('click', function() {
+        const li = document.createElement('li')
+        li.innerHTML = names[~~(Math.random() * names.length)]
+        ul.insertBefore(li, ul.children[~~(ul.children.length * Math.random())])
+        lis.push(animore(li)[0])
+        lis.forEach(l => l.apply())
       })
     </script>
   </body>
