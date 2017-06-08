@@ -66,7 +66,7 @@ const anima = animore('.my-div')[0]
 anima.freeze()
 anima.el.style.marginTop = '300px'
 anima.el.style.marginLeft = '500px'
-anima.unfreze().apply()
+anima.unfreeze().apply()
 // animore will autimatically detect this change and transition the y position of the `div`
 
 ```
