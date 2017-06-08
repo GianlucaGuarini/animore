@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="../animore.js"></script>
+    <style>
+      .box {
+        position: absolute;
+        font: normal 18px Helvetica, Arial;
+        background: #8CE479;
+        width: 200px;
+        height: 200px;
+        cursor: pointer;
+        display: flex;
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class='box'>Click me to change my position and size</div>
+    <script>
+      const box = animore('.box', {
+        duration: 300,
+      })[0]
+
+      box.el.addEventListener('click', function() {
+        const size = Math.max(~~(Math.random() * 500), 150)
+        box.freeze()
+        box.el.style.width = `${size}px`
+        box.el.style.height = `${size}px`
+        box.el.style.top = `${~~(Math.random() * (window.innerHeight - size))}px`
+        box.el.style.left = `${~~(Math.random() * (window.innerWidth - size))}px`
+        box.unfreeze().apply()
+      })
+
+    </script>
+  </body>
+
+</html>

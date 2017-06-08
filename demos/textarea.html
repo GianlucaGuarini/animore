@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="../animore.js"></script>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      textarea {
+        font: normal 18px Helvetica, Arial;
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <textarea>Hi there!</textarea>
+    <script>
+      const a = animore('textarea', {
+        duration: 300
+      })[0]
+      a.el.addEventListener('input', function() {
+        a.freeze()
+        a.el.style.height = '0px'
+        a.unfreeze()
+        a.el.style.height = a.el.scrollHeight + 'px'
+      })
+    </script>
+  </body>
+
+</html>

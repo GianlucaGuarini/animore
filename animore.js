@@ -157,11 +157,12 @@ function flip(el, newProps, prevProps, opts) {
   style(el, {
     opacity: prevProps.opacity,
     willChange: 'transform',
+    transformOrigin: '0 0',
     transform: ("\n    translateX(" + (prevProps.left - newProps.left) + "px)\n    translateY(" + (prevProps.top - newProps.top) + "px)\n    scaleX(" + (prevProps.width / newProps.width) + ")\n    scaleY(" + (prevProps.height / newProps.height) + ")\n")
   });
 
   // force the reflow
-  el.offsetTop;
+  el.scrollTop;
 
   style(el, {
     opacity: newProps.opacity,
@@ -179,50 +180,77 @@ function flip(el, newProps, prevProps, opts) {
  * @returns { Function } ret.destroy - unsubscribe function
  */
 function create(el, opts) {
-  var isTransitioning = false;
+  var isFrozen = false;
+  var isAnimating = false;
 
   var
     props = inspect(el),
     // create an observer instance
-    observer = new window.MutationObserver(function() {
-      if (isTransitioning) { return }
-      isTransitioning = true;
-      var newProps = inspect(el);
-      flip(el, newProps, props, opts);
-      Object.assign(props, newProps);
-      // make sure the transition end will always be triggered
-      setTimeout(function () {
-        if (isTransitioning) {
-          el.dispatchEvent(new Event('transitionend'));
-        }
-      }, opts.duration + TIMER_OFFSET);
-    });
+    observer = new MutationObserver(apply);
 
   observer.observe(el, OBSERVER_CONFIG);
+
+  function removeEvents() {
+    remove(el, 'transitionstart', opts.onStart);
+    remove(el, 'transitionend transitioncancel', cleanup);
+  }
+
+  function addEvents() {
+    add(el, 'transitionstart', opts.onStart);
+    add(el, 'transitionend transitioncancel', cleanup);
+  }
+
+  function apply() {
+    if (isFrozen || isAnimating) { return }
+    isAnimating = true;
+    addEvents();
+    var newProps = inspect(el);
+    flip(el, newProps, props, opts);
+    Object.assign(props, newProps);
+    // make sure the transition end will always be triggered
+    // this will enable the testing of this script also in a node environment
+    setTimeout(function () {
+      if (isAnimating) {
+        el.dispatchEvent(new Event('transitionend'));
+      }
+    }, opts.duration + TIMER_OFFSET);
+  }
 
   // cleanup function triggered when the animations are complete
   function cleanup() {
     var args = [], len = arguments.length;
     while ( len-- ) args[ len ] = arguments[ len ];
 
+    removeEvents();
     style(el, {
       opacity: null,
       transition: null,
-      transform: null
+      transform: null,
+      transformOrigin: null,
+      willChange: null
     });
     opts[args[0].type === 'transitioncancel' ? 'onCancel' : 'onEnd'].apply(null, args);
-    requestAnimationFrame(function () { return isTransitioning = false; });
+    requestAnimationFrame(function () { return isAnimating = false; });
   }
-
-  add(el, 'transitionstart', opts.onStart);
-  add(el, 'transitionend transitioncancel', cleanup);
 
   return {
     el: el,
+    freeze: function freeze() {
+      isFrozen = true;
+      return this
+    },
+    unfreeze: function unfreeze() {
+      isFrozen = false;
+      return this
+    },
+    apply: function apply$1() {
+      apply();
+      return this
+    },
     destroy: function destroy() {
-      remove(el, 'transitionstart', opts.onStart);
-      remove(el, 'transitionend transitioncancel', cleanup);
+      removeEvents();
       observer.disconnect();
+      return this
     }
   }
 }

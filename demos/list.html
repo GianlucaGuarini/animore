@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="../animore.js"></script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      ul {
+        font: normal 18px Helvetica, Arial;
+      }
+      ul li {
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <ul>
+      <li>
+        Matt
+      </li>
+      <li>
+        Sara
+      </li>
+      <li>
+        John
+      </li>
+      <li>
+        Janet
+      </li>
+    </ul>
+    <button>shuffle</button>
+    <script>
+      const lis = animore('li', {
+        duration: 300
+      })
+
+      const button = document.querySelector('button')
+      const ul = document.querySelector('ul')
+      button.addEventListener('click', function() {
+        // update the DOM nodes position
+        lis.reverse().map((li) => {
+          ul.append(li.el)
+          return li.apply
+        }).forEach(fn => fn()) // run the flip animations
+      })
+    </script>
+  </body>
+
+</html>
