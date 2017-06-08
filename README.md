@@ -7,6 +7,12 @@ It uses internally the [`MutationObserver`](https://developer.mozilla.org/it/doc
 [![NPM downloads][npm-downloads-image]][npm-url]
 [![MIT License][license-image]][license-url]
 
+# Demos
+
+- [the box](https://cdn.rawgit.com/GianlucaGuarini/animore/master/demos/box.html)
+- [the list](https://cdn.rawgit.com/GianlucaGuarini/animore/master/demos/list.html)
+- [textarea](https://cdn.rawgit.com/GianlucaGuarini/animore/master/demos/textarea.html)
+
 # Installation
 
 Via npm
