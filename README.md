@@ -121,8 +121,8 @@ Reference to the DOM node observed
 ### @returns HTMLElement
 
 
-[travis-image]:https://img.shields.io/travis/gianlucaguarini/animore.svg?style=flat-square
-[travis-url]:https://travis-ci.org/gianlucaguarini/animore
+[travis-image]:https://img.shields.io/travis/GianlucaGuarini/animore.svg?style=flat-square
+[travis-url]:https://travis-ci.org/GianlucaGuarini/animore
 
 [license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
 [license-url]:LICENSE.txt
