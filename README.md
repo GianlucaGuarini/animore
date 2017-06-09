@@ -9,9 +9,10 @@ It uses internally the [`MutationObserver`](https://developer.mozilla.org/it/doc
 
 # Demos
 
-- [the box](https://cdn.rawgit.com/GianlucaGuarini/animore/master/demos/box.html)
-- [the list](https://cdn.rawgit.com/GianlucaGuarini/animore/master/demos/list.html)
-- [textarea](https://cdn.rawgit.com/GianlucaGuarini/animore/master/demos/textarea.html)
+- [The Gallery](https://cdn.rawgit.com/GianlucaGuarini/animore/master/demos/gallery.html)
+- [The Box](https://cdn.rawgit.com/GianlucaGuarini/animore/master/demos/box.html)
+- [The List](https://cdn.rawgit.com/GianlucaGuarini/animore/master/demos/list.html)
+- [The Textarea](https://cdn.rawgit.com/GianlucaGuarini/animore/master/demos/textarea.html)
 
 # Installation
 

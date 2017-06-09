@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../animore.js"></script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        background: #fff5e2;
+        font: normal 18px "Helvetica Neue", Helvetica, Arial;
+      }
+      h1 {
+        margin: auto;
+      }
+      ul {
+        margin: auto;
+        list-style: none;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 0;
+      }
+      ul li {
+        overflow: hidden;
+        border-radius: 6px;
+        border: 3px solid #fff;
+        margin: 10px;
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        order: 1;
+      }
+
+      ul li.big {
+        width: 300px;
+        height: 300px;
+        order: 0;
+      }
+
+      ul li img {
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Some random photos</h1>
+    <ul>
+      <li><img src="https://unsplash.it/500/500?random" alt=""></li>
+      <li><img src="https://unsplash.it/400/400?random" alt=""></li>
+      <li><img src="https://unsplash.it/600/600?random" alt=""></li>
+      <li><img src="https://unsplash.it/300/300?random" alt=""></li>
+      <li><img src="https://unsplash.it/450/450?random" alt=""></li>
+      <li><img src="https://unsplash.it/660/660?random" alt=""></li>
+      <li><img src="https://unsplash.it/900/900?random" alt=""></li>
+      <li><img src="https://unsplash.it/700/700?random" alt=""></li>
+      <li><img src="https://unsplash.it/800/800?random" alt=""></li>
+      <li><img src="https://unsplash.it/550/550?random" alt=""></li>
+      <li><img src="https://unsplash.it/460/460?random" alt=""></li>
+      <li><img src="https://unsplash.it/320/320?random" alt=""></li>
+      <li><img src="https://unsplash.it/340/340?random" alt=""></li>
+      <li><img src="https://unsplash.it/620/620?random" alt=""></li>
+      <li><img src="https://unsplash.it/450/450?random" alt=""></li>
+      <li><img src="https://unsplash.it/670/670?random" alt=""></li>
+      <li><img src="https://unsplash.it/920/920?random" alt=""></li>
+      <li><img src="https://unsplash.it/720/720?random" alt=""></li>
+      <li><img src="https://unsplash.it/820/820?random" alt=""></li>
+      <li><img src="https://unsplash.it/560/560?random" alt=""></li>
+      <li><img src="https://unsplash.it/500/500?random" alt=""></li>
+      <li><img src="https://unsplash.it/400/400?random" alt=""></li>
+      <li><img src="https://unsplash.it/600/600?random" alt=""></li>
+      <li><img src="https://unsplash.it/300/300?random" alt=""></li>
+      <li><img src="https://unsplash.it/450/450?random" alt=""></li>
+      <li><img src="https://unsplash.it/660/660?random" alt=""></li>
+      <li><img src="https://unsplash.it/900/900?random" alt=""></li>
+      <li><img src="https://unsplash.it/700/700?random" alt=""></li>
+      <li><img src="https://unsplash.it/800/800?random" alt=""></li>
+    </ul>
+    <script>
+      const images = animore('ul li')
+
+      function toggle(e) {
+        const el = e.currentTarget
+        const oldBig = document.querySelector('.big')
+
+        if (oldBig && oldBig !== el) {
+          oldBig.classList.remove('big')
+        }
+
+        if (el.classList.contains('big')) {
+          el.classList.remove('big')
+        } else {
+          el.classList.add('big')
+        }
+
+        images.forEach(img => {
+          if (img.el !== el) {
+            img.apply()
+          }
+        })
+      }
+
+      images.forEach(({el}) => {
+        el.addEventListener('click', toggle)
+      })
+    </script>
+  </body>
+
+</html>
