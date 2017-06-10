@@ -9,6 +9,7 @@ branches:
 
 script:
   npm run build
+  npm test
 
 sudo: false
 
