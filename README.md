@@ -1,6 +1,6 @@
 # animore
 Animore makes DOM state transitions easier
-It uses internally the [`MutationObserver`](https://developer.mozilla.org/it/docs/Web/API/MutationObserver) API to determinate whether a DOM node should be transitioned to a different state. It was inspired by [riot-animore](https://github.com/riot/animore) and works thanks to the [flip technique](https://aerotwist.com/blog/flip-your-animations/) by Paul Lewis
+It uses internally the css transitions to animate 2 different states of the same DOM node. It was inspired by [riot-animore](https://github.com/riot/animore) and works thanks to the [flip technique](https://aerotwist.com/blog/flip-your-animations/) by Paul Lewis
 
 [![Build Status][travis-image]][travis-url]
 [![NPM version][npm-version-image]][npm-url]
@@ -43,34 +43,28 @@ const animore = require('animore')
 
 # Usage
 
-## Simple automatic transitions
+## Simple transitions
 
-You can pass a query or a DOM node to `animore` and it will start watching its changes through a `MutationObserver` to trigger automatically the transitions.
+You can pass a query or a DOM node to `animore` in the following way:
 
 ```js
 
-const anima = animore('.my-div')[0] // animore returns always an array!
-
-anima.el.style.marginTop = '300px'
-// animore will autimatically detect this change and transition the y position of the `div`
+const animaQuery = animore('.my-div')[0] // animore returns always an array!
+const animaNode = animore(myDiv)[0] // DOM nodes are also valid
+const animaList = animore([myDiv, myUl]) // array are also valid
+const animaNodeList = animore(myUl.children) // NodeList are valid as well
 
 ```
 
-## Manual transitions
-
-You can temporary `freeze` the watcher to trigger manually multiple transitions at same time:
+Remeber to use `stash` and `apply` to create your transitions
 
 ```js
-
 const anima = animore('.my-div')[0]
-
-anima.freeze()
+anima.stash() // store the previous DOM position
 anima.el.style.marginTop = '300px'
-anima.el.style.marginLeft = '500px'
-anima.unfreeze().apply()
-// animore will autimatically detect this change and transition the y position of the `div`
-
+anima.apply() // apply the transition
 ```
+
 
 ## Options
 
@@ -89,38 +83,25 @@ animore(myDiv, {
 
 # API
 
-Any animore function will return an object with the following properties
+Any animore call will return an object with the following properties
 
-## animore.destroy
+## animore.stash
 
-Remove the DOM events disconnecting the MutationObserver internally created
+Store the current DOM node position and size
 
-### @returns self
+__@returns self__
 
 ## animore.apply
 
-Apply manually an animation comparing the current DOM node state with its previous state
+Apply the transition comparing the current DOM node state with its previous state (it can be called only after a `stash`)
 
-### @returns self
-
-## animore.freeze
-
-Freeze temporarily all the MutationObserver automatic updates
-
-### @returns self
-
-## animore.unfreeze
-
-Re enable again the automatic transitions updates
-
-### @returns self
+__@returns self__
 
 ## animore.el
 
-Reference to the DOM node observed
+Reference to the DOM node queried
 
-### @returns HTMLElement
-
+__@returns HTMLElement__
 
 [travis-image]:https://img.shields.io/travis/GianlucaGuarini/animore.svg?style=flat-square
 [travis-url]:https://travis-ci.org/GianlucaGuarini/animore
