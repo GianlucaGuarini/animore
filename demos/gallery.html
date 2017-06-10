@@ -80,7 +80,9 @@
       <li><img src="https://unsplash.it/800/800?random" alt=""></li>
     </ul>
     <script>
-      const images = animore('ul li')
+      const images = animore('ul li', {
+        easing: 'cubic-bezier(0.860, 0.000, 0.070, 1.000)'
+      })
 
       function toggle(e) {
         const el = e.currentTarget

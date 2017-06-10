@@ -307,6 +307,8 @@ var DEFAULT_OPTIONS = {
 var IS_ANIMATING_ATTR = 'is-animating';
 var TIMER_OFFSET = 5; // ms
 var ANIMORE_STRUCT = Object.seal({
+  // fallback timer
+  timer: null,
   /**
    * Cleanup function triggered when the animations will be complete
    * @returns { ANIMORE_STRUCT } self
@@ -358,11 +360,13 @@ var ANIMORE_STRUCT = Object.seal({
 
     // make sure the transition end will always be triggered
     // this will enable the testing of this script also in a node environment
-    setTimeout(function () {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(function () {
       if (index_4(_this.el, IS_ANIMATING_ATTR)) {
         _this.el.dispatchEvent(new Event('transitionend'));
       }
     }, this.opts.duration + TIMER_OFFSET);
+
     return this;
   }
 });

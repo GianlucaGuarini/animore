@@ -51,8 +51,8 @@ You can pass a query or a DOM node to `animore` in the following way:
 
 const animaQuery = animore('.my-div')[0] // animore returns always an array!
 const animaNode = animore(myDiv)[0] // DOM nodes are also valid
-const animaList = animore([myDiv, myUl]) // array are also valid
-const animaNodeList = animore(myUl.children) // NodeList are valid as well
+const animaList = animore([myDiv, myUl]) // an arrays are also valid
+const animaNodeList = animore(myUl.children) // NodeLists are valid as well
 
 ```
 

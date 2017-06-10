@@ -1,3 +1,7 @@
+# 2.0.1
+
+- fixed: `setTimeout` debouncing issue
+
 # 2.0.0
 
 - removed: automatic updates using the `MutationObserver` api
