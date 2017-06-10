@@ -1,6 +1,6 @@
 {
   "name": "animore",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Animore makes DOM state transitions easier",
   "main": "animore.js",
   "module": "lib/index.js",
