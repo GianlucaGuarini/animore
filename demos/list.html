@@ -12,9 +12,17 @@
       }
       ul {
         font: normal 18px Helvetica, Arial;
+        list-style: none;
       }
       ul li {
         padding: 10px;
+        margin: 5px;
+        background: #cbf3eb;
+        transition: background 300ms;
+      }
+
+      ul li.added {
+        background: #e3cff3;
       }
     </style>
   </head>
@@ -48,19 +56,32 @@
       const reverse = document.querySelector('.reverse')
       const add = document.querySelector('.add')
       const ul = document.querySelector('ul')
+
       reverse.addEventListener('click', function() {
         // update the DOM nodes position
-        lis.reverse().map((li) => {
-          ul.appendChild(li.el)
-          return li.apply
-        }).forEach(fn => fn()) // run the flip animations
+        lis
+          .reverse()
+          .map(li => {
+            li.stash()
+            ul.appendChild(li.el)
+            return li
+          })
+          .forEach(({apply}) => apply())
       })
 
       add.addEventListener('click', function() {
-        const li = document.createElement('li')
-        li.innerHTML = names[~~(Math.random() * names.length)]
-        ul.insertBefore(li, ul.children[~~(ul.children.length * Math.random())])
-        lis.push(animore(li)[0])
+        const li = animore(document.createElement('li'), {
+          onEnd() {
+            li.el.classList.remove('added')
+          }
+        })[0]
+
+        const index = ~~(ul.children.length * Math.random())
+        li.el.innerHTML = names[~~(Math.random() * names.length)]
+        li.el.classList.add('added')
+        lis.forEach(l => l.stash())
+        ul.insertBefore(li.el, ul.children[index])
+        lis.splice(index, 0, li.stash())
         lis.forEach(l => l.apply())
       })
     </script>

@@ -85,6 +85,7 @@
       function toggle(e) {
         const el = e.currentTarget
         const oldBig = document.querySelector('.big')
+        images.forEach(({ stash }) => stash())
 
         if (oldBig && oldBig !== el) {
           oldBig.classList.remove('big')
@@ -96,11 +97,7 @@
           el.classList.add('big')
         }
 
-        images.forEach(img => {
-          if (img.el !== el) {
-            img.apply()
-          }
-        })
+        images.forEach(({ apply }) => apply())
       }
 
       images.forEach(({el}) => {

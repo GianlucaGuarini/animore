@@ -24,10 +24,10 @@
         duration: 300
       })[0]
       a.el.addEventListener('input', function() {
-        a.freeze()
+        a.stash()
         a.el.style.height = '0px'
-        a.unfreeze()
         a.el.style.height = a.el.scrollHeight + 'px'
+        a.apply()
       })
     </script>
   </body>

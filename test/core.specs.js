@@ -1,11 +1,6 @@
 const assert = require('assert')
-const raf = require('raf')
 // node js DOM polyfills
 require('jsdom-global')()
-require('mutationobserver-shim')
-global.MutationObserver = window.MutationObserver
-global.requestAnimationFrame = raf
-global.cancelAnimationFrame = raf.cancel
 // require the lib
 const animore = require('../')
 
@@ -19,27 +14,17 @@ describe('Animore core', () => {
     const a = animore(el, {
       onEnd() {
         assert.equal(el.style.transform, null)
-        a.destroy()
         done()
       }
     })[0]
-
+    a.stash()
     el.style.marginTop = '20px'
+    a.apply()
   })
 
-  it('The destroy method will properly unsubscribe all the listeners', (done) => {
+  it('It throws if no stash was called before apply', () => {
     const el = dummyEl()
-    const a = animore(el, {
-      onEnd() {
-        assert.ok(false)
-      }
-    })[0]
-
-    el.style.marginTop = '20px'
-    a.destroy()
-
-    setTimeout(() => {
-      done()
-    }, 500)
+    const a = animore(el)[0]
+    assert.throws(a.apply, Error)
   })
 })
