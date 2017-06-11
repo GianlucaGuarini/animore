@@ -8,7 +8,7 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "rollup -c rollup.config.js > animore.js",
-    "test": "npm run lint && mocha test",
+    "test": "npm run lint && ./node_modules/.bin/mocha test",
     "lint": "eslint lib test"
   },
   "devDependencies": {
@@ -17,6 +17,7 @@
     "eslint-config-riot": "^1.0.0",
     "jsdom": "11.0.0",
     "jsdom-global": "3.0.2",
+    "mocha": "^3.4.2",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
