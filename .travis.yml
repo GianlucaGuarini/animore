@@ -8,8 +8,7 @@ branches:
     - dev
 
 script:
-  npm run build
-  npm test
+  npm run build && npm test
 
 sudo: false
 
