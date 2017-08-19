@@ -1,3 +1,7 @@
+# 2.0.2
+
+- fixed: https://github.com/GianlucaGuarini/animore/issues/2
+
 # 2.0.1
 
 - fixed: `setTimeout` debouncing issue

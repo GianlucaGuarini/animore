@@ -13,6 +13,7 @@ describe('Animore core', () => {
     const el = dummyEl()
     const a = animore(el, {
       onEnd() {
+        assert.equal(this.el, el)
         assert.equal(el.style.transform, null)
         done()
       }

@@ -12,15 +12,16 @@
     "lint": "eslint lib test"
   },
   "devDependencies": {
-    "babel-preset-env": "^1.5.0",
-    "eslint": "^3.19.0",
+    "babel-preset-env": "^1.6.0",
+    "eslint": "^4.5.0",
     "eslint-config-riot": "^1.0.0",
-    "jsdom": "11.0.0",
+    "jsdom": "11.1.0",
     "jsdom-global": "3.0.2",
-    "mocha": "^3.4.2",
-    "rollup": "^0.41.6",
-    "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-commonjs": "^8.0.2",
+    "mocha": "^3.5.0",
+    "rollup": "^0.47.6",
+    "babel-core": "^6.26.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.1.0",
     "rollup-plugin-node-resolve": "^3.0.0"
   },
   "author": "Gianluca Guarini <gianluca.guarini@gmail.com> (http://gianlucaguarini.com)",

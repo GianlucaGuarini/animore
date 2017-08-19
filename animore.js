@@ -472,15 +472,16 @@ function bind(src, methods, context) {
 function create(el) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  var animore = bind(Object.assign({}, ANIMORE_STRUCT, {
+  var animore = {};
+
+  return Object.seal(bind(Object.assign(animore, ANIMORE_STRUCT, {
     el: el,
     opts: bind(Object.assign({}, DEFAULT_OPTIONS, opts), ['onStart', 'onEnd', 'onCancel'], animore),
     props: {
       old: null,
       new: null
     }
-  }), ['clear', 'stash', 'apply']);
-  return Object.seal(animore);
+  }), ['clear', 'stash', 'apply']));
 }
 
 /**
