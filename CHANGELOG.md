@@ -1,3 +1,8 @@
+# 2.0.3
+
+- updated: dev dependencies
+- fixed: fixed the dispatch event on IE 11
+
 # 2.0.2
 
 - fixed: https://github.com/GianlucaGuarini/animore/issues/2

@@ -23,16 +23,6 @@
   }
 
   /**
-   * Simple helper to find DOM nodes returning them as array like loopable object
-   * @param   { String|DOMNodeList } selector - either the query or the DOM nodes to arraify
-   * @param   { HTMLElement }        ctx      - context defining where the query will search for the DOM nodes
-   * @returns { Array } DOM nodes found as array
-   */
-  function $(selector, ctx) {
-    return domToArray(typeof selector === 'string' ? (ctx || document).querySelectorAll(selector) : selector);
-  }
-
-  /**
    * Split a string into several items separed by spaces
    * @param   { String } l - events list
    * @returns { Array } all the events detected
@@ -208,6 +198,16 @@
     return parseNodes(els, name, 'hasAttribute');
   }
 
+  /**
+   * Simple helper to find DOM nodes returning them as array like loopable object
+   * @param   { String|DOMNodeList } selector - either the query or the DOM nodes to arraify
+   * @param   { HTMLElement }        ctx      - context defining where the query will search for the DOM nodes
+   * @returns { Array } DOM nodes found as array
+   */
+  function $(selector, ctx) {
+    return domToArray(typeof selector === 'string' ? (ctx || document).querySelectorAll(selector) : selector);
+  }
+
   var DEFAULT_OPTIONS = {
     duration: 300,
     delay: 0,
@@ -289,6 +289,7 @@
   /**
    * Add all the event listeners to the animore.el
    * @this animore
+   * @returns { undefined } void function :(
    */
   function addEvents() {
     add(this.el, 'transitionstart', this.opts.onStart);
@@ -298,6 +299,7 @@
   /**
    * Remove all the event listeners from the animore.el
    * @this animore
+   * @returns { undefined } void function :(
    */
   function removeEvents() {
     remove(this.el, 'transitionstart', this.opts.onStart);
@@ -329,6 +331,7 @@
    * Simple function to apply style properties to a DOM node via js objects
    * @param   { HTMLElement } el - element that will be updated
    * @param   { Object } props - new css rules to apply to the element
+   * @returns { undefined } void function :(
    */
   function style(el, props) {
     Object.keys(props).forEach(function (key) {
@@ -341,6 +344,7 @@
    * @param   { HTMLElement } el - DOM element we want to animate
    * @param   { Object } props - object containing the old and new properties to animate
    * @param   { Object } opts - animation options
+   * @returns { undefined } void function :(
    */
   function flip(el, props, opts) {
     style(el, {
@@ -377,7 +381,7 @@
 
   /**
    * Create a crossbrowser event Object to dispatch on a DOM node
-   * @param   { String } eventName [description]
+   * @param   { string } eventName [description]
    * @returns { Event } event object
    */
   function getEventObject(eventName) {
@@ -394,7 +398,7 @@
   /**
    * Helper function to dispatch a DOM event
    * @param   { HTMLElement } el - target node
-   * @param   { String } eventName - event name
+   * @param   { string } eventName - event name
    * @returns { undefined } this is a void function :(
    */
   function dispatchEvent(el, eventName) {
@@ -424,15 +428,15 @@
 
   /**
    * Returns always an array containing all the animore objects
-   * @param   { Array|String|HTMLElement } el - element/s we want to animate
+   * @param   { Array|string|HTMLElement } el - element/s we want to animate
    * @param   { Object } opts - options object
-   * @param   { Number } opts.duration - transition duration
-   * @param   { String } opts.easing - transition css easing function
-   * @param   { Number } opts.delay - transition delay
+   * @param   { number } opts.duration - transition duration
+   * @param   { string } opts.easing - transition css easing function
+   * @param   { number } opts.delay - transition delay
    * @param   { Function } opts.onEnd - on transition end callback
    * @param   { Function } opts.onStart - on transition start callback
    * @param   { Function } opts.onCancel - on transition cancel callback
-   * @returns { Array }
+   * @returns { Array<animore> } animore objects
    */
   function animore(el, opts) {
     return $(el).map(function (e) {
